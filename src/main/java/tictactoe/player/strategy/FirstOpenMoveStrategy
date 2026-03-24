@@ -1,0 +1,14 @@
+package tictactoe.player.strategy;
+
+import tictactoe.model.Board;
+import tictactoe.model.Mark;
+import tictactoe.model.Move;
+
+public class FirstOpenMoveStrategy implements MoveStrategy {
+    @Override
+    public Move chooseMove(Board board, Mark mark) {
+        return board.getAvailableMoves().stream()
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("No valid moves available."));
+    }
+}
