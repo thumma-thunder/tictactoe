@@ -9,7 +9,7 @@ import java.io.IOException;
 public class GameController {
     private final Game game;
     private final StatisticsManager statisticsManager;
-
+    private boolean statsUpdatedForCurrentGame = false;
     private int xWins;
     private int oWins;
     private int ties;
@@ -41,8 +41,8 @@ public class GameController {
 
     public void restartGame() {
         game.reset();
+        statsUpdatedForCurrentGame = false;
     }
-
     public int getXWins() {
         return xWins;
     }
@@ -56,6 +56,10 @@ public class GameController {
     }
 
     private void updateStatsIfFinished() throws IOException {
+        if (statsUpdatedForCurrentGame) {
+            return;
+        }
+
         switch (game.getResult()) {
             case X_WINS -> xWins++;
             case O_WINS -> oWins++;
@@ -64,6 +68,8 @@ public class GameController {
                 return;
             }
         }
+
+        statsUpdatedForCurrentGame = true;
         statisticsManager.saveStats(xWins, oWins, ties);
     }
 }

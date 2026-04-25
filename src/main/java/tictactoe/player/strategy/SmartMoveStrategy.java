@@ -4,7 +4,7 @@ import tictactoe.model.Board;
 import tictactoe.model.Mark;
 import tictactoe.model.Move;
 
-public class FirstOpenMoveStrategy implements MoveStrategy {
+public class SmartMoveStrategy  implements MoveStrategy {
     @Override
     public Move chooseMove(Board board, Mark mark) {
         return board.getAvailableMoves().stream()

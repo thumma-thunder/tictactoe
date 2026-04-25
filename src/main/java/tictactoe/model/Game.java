@@ -43,6 +43,11 @@ public class Game implements GameSubject {
         }
 
         Move move = currentPlayer.chooseMove(board);
+
+        if (move == null) {
+            return false;
+        }
+
         boolean placed = board.placeMark(move, currentPlayer.getMark());
         if (!placed) {
             return false;

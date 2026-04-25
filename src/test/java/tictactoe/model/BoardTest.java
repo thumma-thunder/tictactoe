@@ -45,4 +45,42 @@ class BoardTest {
 
         assertEquals(GameResult.TIE, board.evaluate());
     }
+
+    @Test
+    void detectsColumnWin() {
+        Board board = new Board();
+        board.placeMark(new Move(0, 1), Mark.O);
+        board.placeMark(new Move(1, 1), Mark.O);
+        board.placeMark(new Move(2, 1), Mark.O);
+
+        assertEquals(GameResult.O_WINS, board.evaluate());
+    }
+
+    @Test
+    void detectsDiagonalWin() {
+        Board board = new Board();
+        board.placeMark(new Move(0, 0), Mark.X);
+        board.placeMark(new Move(1, 1), Mark.X);
+        board.placeMark(new Move(2, 2), Mark.X);
+
+        assertEquals(GameResult.X_WINS, board.evaluate());
+    }
+
+    @Test
+    void rejectsEmptyMark() {
+        Board board = new Board();
+
+        assertThrows(IllegalArgumentException.class, () ->
+                board.placeMark(new Move(0, 0), Mark.EMPTY)
+        );
+    }
+
+    @Test
+    void rejectsOutOfBoundsMove() {
+        Board board = new Board();
+
+        assertThrows(IllegalArgumentException.class, () ->
+                board.placeMark(new Move(3, 0), Mark.X)
+        );
+    }
 }
