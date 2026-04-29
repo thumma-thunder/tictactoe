@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
-
+//Used ChatGPT to help with persistence and stat saving
 public class StatisticsManager {
     private final Path filePath;
 
